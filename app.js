@@ -310,7 +310,7 @@ function escapeAttr(s){
 window.openImage = function(src, caption){
   const dlg = document.getElementById("imageDialog");
   document.getElementById("dialogImage").src = src;
-  document.getElementById("dialogCaption").textContent = caption;
+  document.getElementById("dialogCaption").innerHTML = `${caption}<br><a class="pill small" href="${src}" target="_blank" rel="noopener">Abrir imagen completa en otra pestaña</a>`;
   dlg.showModal();
 }
 
