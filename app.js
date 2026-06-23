@@ -1,321 +1,70 @@
-
 const DATA = window.DANCE_DATA;
-const app = document.getElementById("app");
+const app = document.getElementById('app');
+const state = { person: localStorage.getItem('selectedPerson') || '' };
 
-const KINDS = {
-  "posición": "position",
-  "movimiento": "move",
-  "transición": "transition",
-  "recordatorio": "reminder",
-  "momento": "moment",
-  "forma": "forma",
-  "posición/movimiento": "move"
-};
+function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu,''); }
+function esc(s){ return String(s).replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
+function isEveryone(song){ return song.dancers === 'TODOS'; }
+function dancesSong(person, song){ if(song.introOnly) return false; return isEveryone(song) || (song.dancers||[]).includes(person); }
+function notesFor(person, songId){ return ((DATA.personalNotes || {})[person] || {})[songId] || []; }
 
-const state = {
-  person: localStorage.getItem("selectedPerson") || ""
-};
+function route(){ const h = location.hash.replace('#','') || 'inicio'; const [page, id] = h.split('/'); render(page, decodeURIComponent(id || '')); }
+window.addEventListener('hashchange', route);
 
-function norm(s){
-  return (s || "").toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu,"");
-}
-
-function route(){
-  const hash = location.hash.replace("#","");
-  const [page, id] = hash.split("/");
-  render(page || "inicio", id);
-}
-
-window.addEventListener("hashchange", route);
-
-function shell(content, page="inicio"){
+function shell(content, page){
   app.innerHTML = `
-    <div class="app-shell">
-      <header class="header">
-        <div class="header-inner">
-          <a class="brand" href="#inicio">
-            <div class="logo">💃</div>
-            <div>
-              <h1>Baile sorpresa</h1>
-              <p>Hub visual · boda</p>
-            </div>
-          </a>
-          <div class="top-actions">
-            <a class="pill" href="#timeline">Timeline</a>
-            <a class="pill primary" href="#personas">Mi posición</a>
-          </div>
-        </div>
-      </header>
+    <div class="shell">
+      <header class="top"><div class="top-inner">
+        <a class="brand" href="#inicio"><div class="logo">💃</div><b>Baile boda</b></a>
+        <div class="top-actions"><a class="pill" href="#timeline">Timeline</a><a class="pill primary" href="#personas">Busca tu nombre</a></div>
+      </div></header>
       <main class="main">${content}</main>
-      <nav class="bottom-nav">
-        <div class="bottom-nav-inner">
-          ${navButton("inicio","🏠","Inicio",page)}
-          ${navButton("timeline","🎵","Timeline",page)}
-          ${navButton("personas","👤","Yo",page)}
-          ${navButton("mapas","🗺️","Mapas",page)}
-        </div>
-      </nav>
-    </div>
-  `;
+      <nav class="bottom"><div class="bottom-inner">
+        ${nav('inicio','🏠','Inicio',page)}${nav('timeline','🎵','Timeline',page)}${nav('personas','👤','Yo',page)}${nav('mapas','🗺️','Mapas',page)}
+      </div></nav>
+    </div>`;
 }
+function nav(id, icon, label, current){ return `<button class="nav ${current===id?'active':''}" onclick="location.hash='${id}'"><b>${icon}</b><span>${label}</span></button>`; }
+function render(page, id){ if(page==='timeline') return renderTimeline(); if(page==='song') return renderSong(id); if(page==='personas') return renderPeople(); if(page==='profile') return renderProfile(id); if(page==='mapas') return renderMaps(); return renderHome(); }
 
-function navButton(id, icon, label, current){
-  return `<button class="nav-btn ${current===id ? "active" : ""}" onclick="location.hash='${id}'"><b>${icon}</b><span>${label}</span></button>`;
-}
-
-function render(page, id){
-  if(page === "timeline") return renderTimeline();
-  if(page === "song") return renderSong(id);
-  if(page === "personas") return renderPeople();
-  if(page === "profile") return renderProfile(decodeURIComponent(id || ""));
-  if(page === "mapas") return renderMaps();
-  return renderHome();
-}
-
-function renderHome(){
-  shell(`
-    <section class="hero">
-      <div class="card hero-card">
-        <div class="kicker">Versión v0 actualizable</div>
-        <h2>Entra, toca tu nombre y mira solo lo tuyo.</h2>
-        <p>Esta web está pensada para que nadie se agobie. Las transiciones están marcadas como movimiento y las posiciones reales como posición.</p>
-        <div class="quick-grid">
-          <button class="big-button" onclick="location.hash='personas'">
-            <b>👤 Buscar mi nombre</b>
-            <span>La opción más importante</span>
-          </button>
-          <button class="big-button" onclick="location.hash='timeline'">
-            <b>🎵 Ver timeline</b>
-            <span>Orden completo del baile</span>
-          </button>
-          <button class="big-button" onclick="location.hash='song/grease'">
-            <b>🕺 Ir a Grease</b>
-            <span>Final con María y Carlos</span>
-          </button>
-          <button class="big-button" onclick="location.hash='mapas'">
-            <b>🗺️ Mapas generales</b>
-            <span>Consulta global</span>
-          </button>
-        </div>
-      </div>
-      <aside class="card panic-card">
-        <h3>Regla anti-agobio</h3>
-        <ul>
-          <li><b>1.</b> Mira primero tu nombre.</li>
-          <li><b>2.</b> Si pone movimiento, no te quedes clavado ahí.</li>
-          <li><b>3.</b> En transiciones, busca tu zona sin chocar.</li>
-          <li><b>4.</b> En Grease importa más la intención que la perfección.</li>
-        </ul>
-      </aside>
-    </section>
-    <div class="notice"><b>Faltan vídeos/audio:</b> esta v0 deja el hueco preparado. Cuando paséis vídeos, se incrustan aquí sin cambiar la estructura.</div>
-    ${timelineBlock(false)}
-  `, "inicio");
-}
-
-function timelineBlock(full=true){
-  return `
-    <section>
-      <div class="section-title">
-        <div>
-          <h2>Timeline del show</h2>
-          <p>Toca una canción para ver sus posiciones.</p>
-        </div>
-      </div>
-      <div class="timeline">
-        ${DATA.songs.map((song, i)=>songRow(song, i)).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function songRow(song, i){
-  const ok = song.status.includes("listo") ? "ok" : "warn";
-  return `
-    <article class="song-row" onclick="location.hash='song/${song.id}'">
-      <div class="song-num">${i+1}</div>
-      <div class="song-main">
-        <h3>${song.emoji} ${song.title}</h3>
-        <p>${song.subtitle || ""}</p>
-      </div>
-      <div class="song-tags">
-        <span class="tag ${ok}">${song.status}</span>
-        <span class="tag">${song.steps.length} mapas</span>
-      </div>
-    </article>
-  `;
-}
-
-function renderTimeline(){
-  shell(timelineBlock(), "timeline");
-}
+function timelineHtml(){ return `<section><div class="section-head"><div><h2>Timeline</h2></div></div><div class="timeline">${DATA.songs.map((s,i)=>songRow(s,i)).join('')}</div></section>`; }
+function songRow(song, i){ return `<article class="song-row" onclick="location.hash='song/${song.id}'"><div class="song-num">${i+1}</div><div class="song-main"><h3>${song.emoji} ${song.title}</h3><p>${song.subtitle||''}</p></div><div class="song-arrow">›</div></article>`; }
+function renderHome(){ shell(`<h1 class="home-title">${DATA.siteTitle}</h1><div class="home-actions"><button class="main-button" onclick="location.hash='personas'">Busca tu nombre</button></div>${timelineHtml()}`, 'inicio'); }
+function renderTimeline(){ shell(timelineHtml(), 'timeline'); }
 
 function renderSong(id){
   const song = DATA.songs.find(s=>s.id===id) || DATA.songs[0];
+  if(song.introOnly){
+    shell(`<article class="card song-title-card"><a class="pill small" href="#timeline">← Timeline</a><h1>${song.emoji} ${song.title}</h1><p>${song.subtitle}</p><div class="intro-text">${song.text.map(t=>`<p>${t}</p>`).join('')}</div></article>`, 'timeline');
+    return;
+  }
   shell(`
-    <section class="song-view">
-      <article class="card song-header">
-        <a class="pill small" href="#timeline">← Timeline</a>
-        <h2>${song.emoji} ${song.title}</h2>
-        <p>${song.subtitle || ""}</p>
-        <ul class="summary-list">
-          ${song.summary.map(x=>`<li>${x}</li>`).join("")}
-        </ul>
-      </article>
-      ${song.steps.length ? `
-        <div class="step-grid">
-          ${song.steps.map((step, idx)=>stepCard(step, song, idx)).join("")}
-        </div>
-      ` : `<div class="empty">Aún falta subir material visual de esta parte.</div>`}
-    </section>
-  `, "timeline");
+    <article class="card song-title-card"><a class="pill small" href="#timeline">← Timeline</a><h1>${song.emoji} ${song.title}</h1><p>${song.subtitle||''}</p></article>
+    <section class="card block"><h2>Bailarines</h2>${dancersHtml(song.dancers)}</section>
+    <section class="block"><h2>Posiciones</h2><div class="positions">${song.positions.map(p=>positionCard(p, song)).join('')}</div></section>
+    <section class="card block"><h2>Vídeo baile</h2>${videoCard(song.videos?.dance, 'Vídeo baile · '+song.title)}</section>
+    <section class="card block"><h2>Vídeo paso a paso</h2>${videoCard(song.videos?.step, 'Vídeo paso a paso · '+song.title)}</section>
+    ${song.clarifications?.length ? `<section class="card block"><h2>Aclaraciones</h2><div class="clarifications">${song.clarifications.map(c=>`<div class="clarification">${c}</div>`).join('')}</div></section>` : ''}
+  `, 'timeline');
 }
-
-function kindTag(kind){
-  const css = KINDS[kind] || "";
-  return `<span class="tag ${css}">${kind}</span>`;
-}
-
-function stepCard(step, song, idx){
-  return `
-    <article class="card step-card">
-      <div class="step-top">
-        <h3>${idx+1}. ${step.title}</h3>
-        ${kindTag(step.kind)}
-      </div>
-      <div class="image-wrap">
-        <img src="${step.image}" alt="${song.title} · ${step.title}" loading="lazy">
-        <button onclick="openImage('${step.image}', '${escapeAttr(song.title)} · ${escapeAttr(step.title)}')">Ampliar</button>
-      </div>
-      <div class="video-box">🎬 <span><b>Vídeo:</b> pendiente de subir</span></div>
-      <ul class="step-notes">
-        ${step.notes.map(n=>`<li>${n}</li>`).join("")}
-      </ul>
-    </article>
-  `;
-}
+function dancersHtml(dancers){ if(dancers==='TODOS') return `<div class="chips"><span class="chip all">TODOS</span></div>`; return `<div class="chips">${dancers.map(d=>`<span class="chip">${d}</span>`).join('')}</div>`; }
+function labelClass(label){ const l=norm(label); if(l.includes('mov')) return 'mov'; if(l.includes('trans')) return 'trans'; if(l.includes('mom')||l.includes('forma')) return 'mom'; if(l.includes('record')) return 'rec'; return 'pos'; }
+function positionCard(p, song){ return `<article class="card pos-card"><div class="pos-head"><h3>${p.title}</h3><span class="tag ${labelClass(p.label)}">${p.label}</span></div><div class="image-wrap"><img src="${p.image}" alt="${song.title} · ${p.title}" loading="lazy"><button onclick="openImage('${p.image}','${esc(song.title)} · ${esc(p.title)}')">Ampliar</button></div><ul class="notes">${p.notes.map(n=>`<li>${n}</li>`).join('')}</ul></article>`; }
+function videoCard(src, title){ if(!src) return `<div class="empty">Pendiente de subir.</div>`; return `<div class="video-card"><h3>${title}</h3><video src="${src}" controls preload="metadata" playsinline></video></div>`; }
 
 function renderPeople(){
-  const q = "";
-  shell(`
-    <section>
-      <div class="section-title">
-        <div>
-          <h2>Busca tu nombre</h2>
-          <p>Elige tu perfil. Esto es lo que debe mirar cada persona.</p>
-        </div>
-      </div>
-      <input id="personSearch" class="search-box" placeholder="Escribe tu nombre… Ej: Ruth, Sof, Manuel" oninput="filterPeople()">
-      <div id="peopleGrid" class="people-grid">
-        ${DATA.participants.map(p=>personChip(p)).join("")}
-      </div>
-      <div id="selectedProfile">
-        ${state.person ? profileHtml(state.person) : `<div class="empty">Toca tu nombre para ver tu resumen personal.</div>`}
-      </div>
-    </section>
-  `, "personas");
+  shell(`<section><div class="section-head"><div><h2>Busca tu nombre</h2><p>Te saldrán solo los bailes que haces tú.</p></div></div><input id="personSearch" class="search" placeholder="Escribe tu nombre…" oninput="filterPeople()"><div id="people" class="people">${DATA.participants.map(p=>personChip(p)).join('')}</div><div id="profileBox">${state.person ? profileHtml(state.person) : `<div class="empty">Toca tu nombre para ver tus bailes.</div>`}</div></section>`, 'personas');
 }
-
-function personChip(person){
-  const active = state.person === person.name ? "active" : "";
-  return `<button class="person-chip ${active}" data-name="${person.name}" onclick="selectPerson('${escapeAttr(person.name)}')">${person.name}</button>`;
+function personChip(name){ return `<button class="person ${state.person===name?'active':''}" data-name="${esc(name)}" onclick="selectPerson('${esc(name)}')">${name}</button>`; }
+window.selectPerson = function(name){ state.person = name; localStorage.setItem('selectedPerson', name); renderPeople(); }
+window.filterPeople = function(){ const q = norm(document.getElementById('personSearch').value); document.querySelectorAll('.person').forEach(el=>{el.style.display = norm(el.dataset.name).includes(q) ? '' : 'none';}); }
+function renderProfile(name){ shell(`<a class="pill small" href="#personas">← Volver</a>${profileHtml(name || state.person)}`, 'personas'); }
+function profileHtml(person){
+  const songs = DATA.songs.filter(s=>dancesSong(person, s));
+  return `<article class="card profile"><h2>${person}</h2><p class="muted">Estos son tus bailes. Mira solo estos.</p>${songs.length ? `<div class="dance-buttons">${songs.map(s=>profileSong(person,s)).join('')}</div>` : `<div class="empty">No tengo bailes asignados para este nombre.</div>`}</article>`;
 }
-
-window.selectPerson = function(name){
-  state.person = name;
-  localStorage.setItem("selectedPerson", name);
-  renderPeople();
-}
-
-window.filterPeople = function(){
-  const q = norm(document.getElementById("personSearch").value);
-  const chips = [...document.querySelectorAll(".person-chip")];
-  chips.forEach(chip => {
-    chip.style.display = norm(chip.dataset.name).includes(q) ? "" : "none";
-  });
-}
-
-function profileHtml(name){
-  const specialNotes = DATA.personalNotes[name] || [
-    "Busca tu nombre o inicial en cada imagen.",
-    "Si la tarjeta pone movimiento/transición, no es para quedarse quieto: es para llegar al siguiente sitio.",
-    "Si te agobias, mira solo los mapas clave de cada canción."
-  ];
-
-  const songs = DATA.songs.filter(s=>s.steps.length);
-  return `
-    <article class="card profile-card">
-      <div class="profile-head">
-        <h2>Perfil de ${name}</h2>
-        <a class="pill small" href="#profile/${encodeURIComponent(name)}">Abrir perfil</a>
-      </div>
-      <div class="profile-notes">
-        ${specialNotes.map(n=>`<div class="profile-note">${n}</div>`).join("")}
-      </div>
-      <div class="profile-song-list">
-        ${songs.map(song => profileSong(song, name)).join("")}
-      </div>
-    </article>
-  `;
-}
-
-function profileSong(song, name){
-  const specials = song.steps.filter(st => (st.special || []).includes(name));
-  const specialText = specials.length
-    ? specials.map(s=>`<b>${s.title}:</b> ${s.notes.join(" ")}`).join("<br>")
-    : "Mira los mapas de esta canción y busca tu nombre/inicial.";
-  return `
-    <div class="profile-song">
-      <h3>${song.emoji} ${song.title}</h3>
-      <p>${specialText}</p>
-      <p style="margin-top:8px"><a class="pill small" href="#song/${song.id}">Ver mapas</a></p>
-    </div>
-  `;
-}
-
-function renderProfile(name){
-  shell(`
-    <a class="pill small" href="#personas">← Volver a nombres</a>
-    ${profileHtml(name || state.person || "Sin nombre")}
-  `, "personas");
-}
-
-function renderMaps(){
-  const maps = DATA.songs.flatMap(song => song.steps.map((step, i)=>({song, step, i})));
-  shell(`
-    <section>
-      <div class="section-title">
-        <div>
-          <h2>Posiciones generales</h2>
-          <p>Todos los mapas en orden. Úsalo solo para consulta global.</p>
-        </div>
-      </div>
-      <div class="general-grid">
-        ${maps.map(({song, step, i})=>`
-          <article class="mini-map" onclick="openImage('${step.image}', '${escapeAttr(song.title)} · ${escapeAttr(step.title)}')">
-            <img src="${step.image}" alt="${song.title} · ${step.title}" loading="lazy">
-            <h3>${song.emoji} ${song.title} · ${step.title}</h3>
-            <p>${step.kind}</p>
-          </article>
-        `).join("")}
-      </div>
-    </section>
-  `, "mapas");
-}
-
-function escapeAttr(s){
-  return String(s).replace(/'/g,"&#39;").replace(/"/g,"&quot;");
-}
-
-window.openImage = function(src, caption){
-  const dlg = document.getElementById("imageDialog");
-  document.getElementById("dialogImage").src = src;
-  document.getElementById("dialogCaption").innerHTML = `${caption}<br><a class="pill small" href="${src}" target="_blank" rel="noopener">Abrir imagen completa en otra pestaña</a>`;
-  dlg.showModal();
-}
-
-window.closeImage = function(){
-  document.getElementById("imageDialog").close();
-}
-
+function profileSong(person, song){ const ns = notesFor(person, song.id); return `<div class="dance-button" onclick="location.hash='song/${song.id}'"><b>${song.emoji} ${song.title}</b><span>${song.subtitle||''}</span>${ns.length ? `<div class="personal-note">${ns.map(n=>`<div>${n}</div>`).join('')}</div>` : ''}</div>`; }
+function renderMaps(){ const maps = DATA.songs.flatMap(s => (s.positions||[]).map(p=>({song:s,pos:p}))); shell(`<section><div class="section-head"><div><h2>Posiciones generales</h2><p>Consulta global de todas las imágenes.</p></div></div><div class="maps">${maps.map(({song,pos})=>`<article class="mini" onclick="openImage('${pos.image}','${esc(song.title)} · ${esc(pos.title)}')"><img src="${pos.image}" alt="${song.title} · ${pos.title}" loading="lazy"><h3>${song.emoji} ${song.title} · ${pos.title}</h3><p>${pos.label}</p></article>`).join('')}</div></section>`, 'mapas'); }
+window.openImage = function(src, caption){ const d=document.getElementById('imageDialog'); document.getElementById('dialogImage').src=src; document.getElementById('dialogCaption').textContent=caption; d.showModal(); }
+window.closeImage = function(){ document.getElementById('imageDialog').close(); }
 route();

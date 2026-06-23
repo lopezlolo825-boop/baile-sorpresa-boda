@@ -1,260 +1,111 @@
 window.DANCE_DATA = {
+  "siteTitle": "Baile boda: Carlos y María",
   "participants": [
-    {
-      "name": "Hy",
-      "aliases": [
-        "Hy",
-        "H"
-      ]
-    },
-    {
-      "name": "Joel",
-      "aliases": [
-        "Joel",
-        "J"
-      ]
-    },
-    {
-      "name": "Manuel",
-      "aliases": [
-        "Manuel",
-        "M"
-      ]
-    },
-    {
-      "name": "Abel",
-      "aliases": [
-        "Abel",
-        "A"
-      ]
-    },
-    {
-      "name": "Javier",
-      "aliases": [
-        "Javier",
-        "Javi",
-        "J"
-      ]
-    },
-    {
-      "name": "Roque",
-      "aliases": [
-        "Roque",
-        "R"
-      ]
-    },
-    {
-      "name": "Rubén",
-      "aliases": [
-        "Rubén",
-        "Ruben",
-        "R"
-      ]
-    },
-    {
-      "name": "Iker",
-      "aliases": [
-        "Iker",
-        "I"
-      ]
-    },
-    {
-      "name": "Laura",
-      "aliases": [
-        "Laura",
-        "L"
-      ]
-    },
-    {
-      "name": "Marta",
-      "aliases": [
-        "Marta",
-        "M"
-      ]
-    },
-    {
-      "name": "Paula",
-      "aliases": [
-        "Paula",
-        "P"
-      ]
-    },
-    {
-      "name": "Ruth",
-      "aliases": [
-        "Ruth",
-        "R"
-      ]
-    },
-    {
-      "name": "Sofía M",
-      "aliases": [
-        "Sofía M",
-        "Sofia M",
-        "Sofi",
-        "SM"
-      ]
-    },
-    {
-      "name": "Sof",
-      "aliases": [
-        "Sof",
-        "S"
-      ]
-    },
-    {
-      "name": "Susi",
-      "aliases": [
-        "Susi",
-        "S"
-      ]
-    },
-    {
-      "name": "Daniela",
-      "aliases": [
-        "Daniela",
-        "D"
-      ]
-    },
-    {
-      "name": "Pauli",
-      "aliases": [
-        "Pauli",
-        "P"
-      ]
-    },
-    {
-      "name": "Martina",
-      "aliases": [
-        "Martina",
-        "M"
-      ]
-    },
-    {
-      "name": "Alba",
-      "aliases": [
-        "Alba",
-        "A"
-      ]
-    },
-    {
-      "name": "Clara",
-      "aliases": [
-        "Clara",
-        "C"
-      ]
-    },
-    {
-      "name": "Aitana",
-      "aliases": [
-        "Aitana",
-        "A"
-      ]
-    },
-    {
-      "name": "Lorena",
-      "aliases": [
-        "Lorena",
-        "L"
-      ]
-    },
-    {
-      "name": "Elena",
-      "aliases": [
-        "Elena",
-        "E"
-      ]
-    },
-    {
-      "name": "Rosa",
-      "aliases": [
-        "Rosa",
-        "R"
-      ]
-    },
-    {
-      "name": "María",
-      "aliases": [
-        "María",
-        "Maria"
-      ]
-    },
-    {
-      "name": "Carlos",
-      "aliases": [
-        "Carlos"
-      ]
-    }
+    "Hy",
+    "Joel",
+    "Manuel",
+    "Abel",
+    "Laura",
+    "Marta",
+    "Javi",
+    "Roque",
+    "Rubén",
+    "Iker",
+    "Aitana",
+    "Sofía M",
+    "Paula",
+    "Ruth",
+    "Pauli",
+    "Susi",
+    "Daniela",
+    "Alba",
+    "Martina",
+    "Lorena",
+    "Clara",
+    "Daniel",
+    "Sof",
+    "Rosa",
+    "Elena"
   ],
   "songs": [
     {
       "id": "intro",
-      "title": "Intro instrumental",
+      "title": "Intro",
       "subtitle": "Señor de los Anillos",
       "emoji": "🧙‍♂️",
-      "status": "pendiente",
-      "summary": [
-        "Entrada y preparación de escena.",
-        "Material visual pendiente.",
-        "Usa esta parte para colocarte con calma."
-      ],
-      "steps": []
+      "introOnly": true,
+      "text": [
+        "Cuando empiece a sonar la música, tendremos unos 50 segundos para levantarnos, pedir a María y Carlos que se sienten mirando hacia nosotros y colocarnos en nuestro sitio.",
+        "Los chicos, cuando la música empiece a bajar, se ponen las gafas y se colocan en posición.",
+        "Cuando llegue el silencio, todos atentos: justo después empieza Uptown Funk."
+      ]
     },
     {
       "id": "uptown",
       "title": "Uptown Funk",
       "subtitle": "Bruno Mars",
       "emoji": "🔥",
-      "status": "listo v0",
-      "summary": [
-        "Empiezan los chicos en línea central.",
-        "Entran las chicas en Hallelujah.",
-        "Laura va hacia izquierda y su grupo la sigue.",
-        "Marta va hacia derecha y su grupo la sigue.",
-        "Algunas imágenes son movimiento, no posición fija."
+      "dancers": [
+        "Hy",
+        "Joel",
+        "Manuel",
+        "Abel",
+        "Laura",
+        "Marta",
+        "Javi",
+        "Roque",
+        "Rubén",
+        "Iker"
       ],
-      "steps": [
+      "videos": {
+        "dance": "assets/videos/uptown-baile.mp4",
+        "step": "assets/videos/uptown-paso-a-paso.mp4"
+      },
+      "positions": [
         {
           "title": "Inicio",
-          "kind": "posición",
-          "image": "assets/uptown-01-inicio.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/uptown-01-inicio.webp",
           "notes": [
-            "Línea central preparada.",
-            "Las chicas esperan en los laterales.",
-            "No entres hasta tu momento."
+            "Empiezan los chicos en línea central.",
+            "Todos los de Uptown Funk llevan gafas.",
+            "Atentos al silencio de la intro: ahí empieza esta canción."
           ]
         },
         {
           "title": "Hallelujah",
-          "kind": "posición",
-          "image": "assets/uptown-02-hallelujah.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/uptown-02-hallelujah.webp",
           "notes": [
-            "Entran las chicas.",
-            "Laura y Marta quedan delante.",
-            "Cada grupo empieza a ir a su lado."
+            "Laura y Marta van delante.",
+            "Laura y Marta señalan a las chicas.",
+            "Después se prepara la salida hacia los lados."
           ]
         },
         {
-          "title": "Transición chicos",
-          "kind": "movimiento",
-          "image": "assets/uptown-03-transicion-chicos.webp",
+          "title": "Salida chicos",
+          "label": "MOVIMIENTO",
+          "image": "assets/img/uptown-03-transicion-chicos.webp",
           "notes": [
-            "Los chicos se van en ese orden.",
-            "Laura tira hacia la izquierda.",
-            "Marta tira hacia la derecha.",
-            "Sigue a tu líder: no es una posición fija."
+            "No es posición fija.",
+            "Laura va hacia la izquierda y su grupo la sigue.",
+            "Marta va hacia la derecha y su grupo la sigue."
           ]
         },
         {
-          "title": "Transición chicas",
-          "kind": "movimiento",
-          "image": "assets/uptown-04-transicion-chicas.webp",
+          "title": "Entrada chicas",
+          "label": "MOVIMIENTO",
+          "image": "assets/img/uptown-04-transicion-chicas.webp",
           "notes": [
             "Las chicas entran en ese orden.",
-            "No te quedes parada en esta imagen.",
-            "Es movimiento para llegar a la siguiente parte."
+            "No hay que quedarse quieto en esta imagen."
           ]
         }
+      ],
+      "clarifications": [
+        "Laura y Marta son las referencias visuales: tienen que ir claras y delante.",
+        "Los chicos dan palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas.",
+        "Todas las imágenes marcadas como movimiento son para desplazarse, no para quedarse parado."
       ]
     },
     {
@@ -262,36 +113,46 @@ window.DANCE_DATA = {
       "title": "Crazy in Love",
       "subtitle": "Beyoncé",
       "emoji": "💥",
-      "status": "listo v0",
-      "summary": [
-        "Las tres primeras imágenes son movimiento circular.",
-        "La posición importante llega en la imagen 4.",
-        "La imagen 5 es la segunda posición real.",
-        "No memorices el círculo exacto: sigue el recorrido."
+      "dancers": [
+        "Joel",
+        "Aitana",
+        "Sofía M",
+        "Paula",
+        "Ruth",
+        "Pauli",
+        "Susi",
+        "Daniela",
+        "Alba",
+        "Martina",
+        "Lorena"
       ],
-      "steps": [
+      "videos": {
+        "dance": "assets/videos/crazy-baile.mp4",
+        "step": "assets/videos/crazy-paso-a-paso.mp4"
+      },
+      "positions": [
         {
           "title": "Movimiento circular 1",
-          "kind": "movimiento",
-          "image": "assets/crazy-01-movimiento-circular.webp",
+          "label": "MOVIMIENTO",
+          "image": "assets/img/crazy-01-movimiento-circular.webp",
           "notes": [
-            "Empieza el cambio circular.",
-            "No es posición final."
+            "Empieza el movimiento circular.",
+            "No es posición fija."
           ]
         },
         {
           "title": "Movimiento circular 2",
-          "kind": "movimiento",
-          "image": "assets/crazy-02-movimiento-circular.webp",
+          "label": "MOVIMIENTO",
+          "image": "assets/img/crazy-02-movimiento-circular.webp",
           "notes": [
-            "Seguimos girando/cambiando.",
-            "Mantén tu dirección."
+            "Seguimos el recorrido circular.",
+            "No te quedes parado aquí."
           ]
         },
         {
           "title": "Movimiento circular 3",
-          "kind": "movimiento",
-          "image": "assets/crazy-03-movimiento-circular.webp",
+          "label": "MOVIMIENTO",
+          "image": "assets/img/crazy-03-movimiento-circular.webp",
           "notes": [
             "Termina el recorrido.",
             "Prepara la posición siguiente."
@@ -299,8 +160,8 @@ window.DANCE_DATA = {
         },
         {
           "title": "Posición 1",
-          "kind": "posición",
-          "image": "assets/crazy-04-posicion.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/crazy-04-posicion.webp",
           "notes": [
             "Primera posición real de Crazy in Love.",
             "Busca tu nombre y mantén tu sitio."
@@ -308,13 +169,16 @@ window.DANCE_DATA = {
         },
         {
           "title": "Posición 2",
-          "kind": "posición",
-          "image": "assets/crazy-05-posicion.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/crazy-05-posicion.webp",
           "notes": [
             "Segunda posición real.",
-            "Aguanta hasta el siguiente cambio."
+            "Mantén el sitio hasta el siguiente cambio."
           ]
         }
+      ],
+      "clarifications": [
+        "Las imágenes 1, 2 y 3 son movimiento circular para llegar a la posición 4."
       ]
     },
     {
@@ -322,18 +186,30 @@ window.DANCE_DATA = {
       "title": "I Gotta Feeling",
       "subtitle": "Black Eyed Peas",
       "emoji": "🎉",
-      "status": "listo v0",
-      "summary": [
-        "Secuencia bastante clara.",
-        "Daniela va delante en la segunda imagen.",
-        "En UUU 2 caen Paula y Ruth.",
-        "La última es el cierre de esta parte."
+      "dancers": [
+        "Clara",
+        "Laura",
+        "Marta",
+        "Martina",
+        "Manuel",
+        "Abel",
+        "Daniel",
+        "Roque",
+        "Ruth",
+        "Paula",
+        "Lorena",
+        "Pauli",
+        "Sofía M"
       ],
-      "steps": [
+      "videos": {
+        "dance": "assets/videos/igotta-baile.mp4",
+        "step": "assets/videos/igotta-paso-a-paso.mp4"
+      },
+      "positions": [
         {
           "title": "Monday Tuesday",
-          "kind": "posición",
-          "image": "assets/igotta-01-monday-tuesday.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/igotta-01-monday-tuesday.webp",
           "notes": [
             "Primera colocación de esta parte.",
             "Busca tu sitio marcado."
@@ -341,38 +217,34 @@ window.DANCE_DATA = {
         },
         {
           "title": "I gotta feeling",
-          "kind": "posición",
-          "image": "assets/igotta-02-daniela-delante.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/igotta-02-daniela-delante.webp",
           "notes": [
-            "Daniela va delante.",
-            "El resto mantiene su posición alrededor."
-          ],
-          "special": [
-            "Daniela"
+            "Daniela va delante del todo.",
+            "Daniela hace el momento “I gotta feeling”."
           ]
         },
         {
           "title": "UUU 2",
-          "kind": "momento",
-          "image": "assets/igotta-03-caen-paula-ruth.webp",
+          "label": "MOMENTO",
+          "image": "assets/img/igotta-03-caen-paula-ruth.webp",
           "notes": [
-            "Aquí caen Paula y Ruth.",
-            "El resto mantiene la colocación."
-          ],
-          "special": [
-            "Paula",
-            "Ruth"
+            "Aquí caen Ruth y Paula en el segundo “uu”.",
+            "Roque y Laura tienen que estar preparados para cogerlas."
           ]
         },
         {
           "title": "Final",
-          "kind": "posición",
-          "image": "assets/igotta-04-final.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/igotta-04-final.webp",
           "notes": [
             "Última posición de la secuencia.",
-            "Quédate hasta el siguiente cambio."
+            "Aguanta hasta el siguiente cambio."
           ]
         }
+      ],
+      "clarifications": [
+        "Ruth y Paula caen en el segundo “uu”. Roque y Laura deben estar preparados para cogerlas."
       ]
     },
     {
@@ -380,18 +252,22 @@ window.DANCE_DATA = {
       "title": "Wannabe",
       "subtitle": "Spice Girls",
       "emoji": "✌️",
-      "status": "listo v0",
-      "summary": [
-        "Bloque Xula 1, 2, 3 y 4.",
-        "Luego llega la parte Spicegirls.",
-        "Si te pierdes, busca tu zona general y vuelve a entrar.",
-        "Aún falta concretar si Xula son posiciones o movimiento."
+      "dancers": [
+        "Sof",
+        "Rosa",
+        "Elena",
+        "Aitana",
+        "Javi"
       ],
-      "steps": [
+      "videos": {
+        "dance": "assets/videos/wannabe-baile.mp4",
+        "step": "assets/videos/wannabe-paso-a-paso.mp4"
+      },
+      "positions": [
         {
           "title": "Xula 1",
-          "kind": "posición/movimiento",
-          "image": "assets/wannabe-01-xula1.webp",
+          "label": "POSICIÓN / MOVIMIENTO",
+          "image": "assets/img/wannabe-01-xula1.webp",
           "notes": [
             "Primera imagen de Wannabe.",
             "Mira tu sitio marcado."
@@ -399,26 +275,26 @@ window.DANCE_DATA = {
         },
         {
           "title": "Xula 2",
-          "kind": "posición/movimiento",
-          "image": "assets/wannabe-02-xula2.webp",
+          "label": "POSICIÓN / MOVIMIENTO",
+          "image": "assets/img/wannabe-02-xula2.webp",
           "notes": [
             "Cambio de sitio.",
-            "Sigue tu marca y tu zona."
+            "Sigue tu zona."
           ]
         },
         {
           "title": "Xula 3",
-          "kind": "posición/movimiento",
-          "image": "assets/wannabe-03-xula3.webp",
+          "label": "POSICIÓN / MOVIMIENTO",
+          "image": "assets/img/wannabe-03-xula3.webp",
           "notes": [
             "Movimiento intermedio.",
-            "Rosa y Sof se recolocan por el centro."
+            "Mantén tu lado."
           ]
         },
         {
           "title": "Xula 4",
-          "kind": "posición/movimiento",
-          "image": "assets/wannabe-04-xula4.webp",
+          "label": "POSICIÓN / MOVIMIENTO",
+          "image": "assets/img/wannabe-04-xula4.webp",
           "notes": [
             "Último cambio antes de Spicegirls.",
             "Mantén tu zona."
@@ -426,14 +302,16 @@ window.DANCE_DATA = {
         },
         {
           "title": "Spicegirls",
-          "kind": "posición",
-          "image": "assets/wannabe-05-spicegirls.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/wannabe-05-spicegirls.webp",
           "notes": [
             "Posición Spicegirls.",
-            "Javier aparece en la zona central.",
-            "Aguanta hasta el cambio."
+            "Javi aparece en la zona central."
           ]
         }
+      ],
+      "clarifications": [
+        "Si alguien se pierde, que vuelva a su zona general y siga con el grupo."
       ]
     },
     {
@@ -441,77 +319,69 @@ window.DANCE_DATA = {
       "title": "Somos Misioneros",
       "subtitle": "Transición cómica",
       "emoji": "😇",
-      "status": "listo v0",
-      "summary": [
-        "Es una transición hacia Grease.",
-        "No importa tanto dónde te pongas exacto.",
-        "Lo importante es ir buscando tu sitio de Grease.",
-        "Muévete sin chocar."
-      ],
-      "steps": [
+      "dancers": "TODOS",
+      "videos": {
+        "dance": "assets/videos/misioneros-baile.mp4",
+        "step": "assets/videos/misioneros-paso-a-paso.mp4"
+      },
+      "positions": [
         {
           "title": "Cambio",
-          "kind": "transición",
-          "image": "assets/misioneros-01-cambio.webp",
+          "label": "TRANSICIÓN",
+          "image": "assets/img/misioneros-01-cambio.webp",
           "notes": [
             "Empieza el cambio.",
-            "Ve acercándote a tu zona de Grease.",
-            "No busques posición perfecta todavía."
+            "Ve buscando tu zona para Grease."
           ]
         },
         {
           "title": "Somos Misioneros",
-          "kind": "transición",
-          "image": "assets/misioneros-02-transicion.webp",
+          "label": "TRANSICIÓN",
+          "image": "assets/img/misioneros-02-transicion.webp",
           "notes": [
-            "No importa estar exacto.",
-            "Busca tu sitio para Grease.",
-            "Es transición, no posición final."
+            "No importa estar en el punto exacto.",
+            "Lo importante es ir buscando tu sitio de Grease.",
+            "Muévete sin chocar."
           ]
         }
+      ],
+      "clarifications": [
+        "Esta parte es para recolocarse hacia Grease. No hay que obsesionarse con la posición exacta."
       ]
     },
     {
       "id": "grease",
       "title": "Grease",
-      "subtitle": "You're the One That I Want",
+      "subtitle": "You’re the One That I Want",
       "emoji": "🕺",
-      "status": "listo v0",
-      "summary": [
-        "Primero colocación real de Grease.",
-        "Ruth y Sofía M van a buscar a María y Carlos.",
-        "Después todos hacen círculo alrededor de ellos.",
-        "Al final nos acercamos al centro tipo abrazo."
-      ],
-      "steps": [
+      "dancers": "TODOS",
+      "videos": {
+        "dance": "assets/videos/grease-baile.mp4",
+        "step": "assets/videos/grease-paso-a-paso.mp4"
+      },
+      "positions": [
         {
           "title": "Posición Grease",
-          "kind": "posición",
-          "image": "assets/grease-01-posicion.webp",
+          "label": "POSICIÓN",
+          "image": "assets/img/grease-01-posicion.webp",
           "notes": [
             "Colócate en tu sitio de Grease.",
-            "Esta es la posición importante de entrada."
+            "Esta sí es una posición real."
           ]
         },
         {
           "title": "María y Carlos",
-          "kind": "momento",
-          "image": "assets/grease-02-maria-carlos.webp",
+          "label": "MOMENTO",
+          "image": "assets/img/grease-02-maria-carlos.webp",
           "notes": [
             "Ruth y Sofía M van a buscar a María y Carlos.",
             "El resto mantiene su zona de Grease."
-          ],
-          "special": [
-            "Ruth",
-            "Sofía M",
-            "María",
-            "Carlos"
           ]
         },
         {
           "title": "Círculo",
-          "kind": "forma",
-          "image": "assets/grease-03-circulo.webp",
+          "label": "FORMA GENERAL",
+          "image": "assets/img/grease-03-circulo.webp",
           "notes": [
             "Haced un círculo alrededor de María y Carlos.",
             "No tiene que salir perfecto.",
@@ -520,53 +390,122 @@ window.DANCE_DATA = {
         },
         {
           "title": "Abrazo final",
-          "kind": "recordatorio",
-          "image": "assets/grease-04-abrazo.webp",
+          "label": "RECORDATORIO",
+          "image": "assets/img/grease-04-abrazo.webp",
           "notes": [
             "No es posición exacta.",
-            "Al terminar, nos acercamos a ellos.",
+            "Al terminar, nos acercamos al centro.",
             "Cierre tipo abrazo/grupo junto."
           ]
         }
+      ],
+      "clarifications": [
+        "En Grease importa más la intención que la perfección: traer a María y Carlos, hacer círculo y cerrar juntos."
       ]
     }
   ],
   "personalNotes": {
-    "Laura": [
-      "En Uptown Funk eres una de las referencias: tiras hacia la izquierda y tu grupo te sigue.",
-      "En el resto de partes, busca tu nombre en cada mapa y mantén tu zona."
-    ],
-    "Marta": [
-      "En Uptown Funk eres una de las referencias: tiras hacia la derecha y tu grupo te sigue.",
-      "En el resto de partes, busca tu nombre en cada mapa y mantén tu zona."
-    ],
-    "Daniela": [
-      "En I Gotta Feeling, en la segunda imagen, vas delante.",
-      "En el resto, busca tu nombre y no te obsesiones si una transición no es exacta."
-    ],
-    "Paula": [
-      "En I Gotta Feeling, en UUU 2, caes junto a Ruth.",
-      "En Grease y transiciones, busca tu zona y sigue el grupo."
-    ],
-    "Ruth": [
-      "En I Gotta Feeling, en UUU 2, caes junto a Paula.",
-      "En Grease vas a buscar a María y Carlos junto a Sofía M."
-    ],
-    "Sofía M": [
-      "En los mapas apareces como Sofi / SM.",
-      "En Grease vas a buscar a María y Carlos junto a Ruth."
-    ],
-    "Sof": [
-      "En los mapas apareces como Sof.",
-      "En Wannabe y Grease mira bien tu zona central/derecha."
-    ],
-    "María": [
-      "En Grease eres el centro del círculo.",
-      "Ruth y Sofía M van a buscaros."
-    ],
-    "Carlos": [
-      "En Grease eres el centro del círculo.",
-      "Ruth y Sofía M van a buscaros."
-    ]
+    "Laura": {
+      "uptown": [
+        "Vas delante y tienes que señalar a las chicas.",
+        "Tu grupo te sigue hacia la izquierda.",
+        "Lleva gafas."
+      ],
+      "igotta": [
+        "En el segundo “uu”, prepárate para coger a Ruth/Paula."
+      ]
+    },
+    "Marta": {
+      "uptown": [
+        "Vas delante y tienes que señalar a las chicas.",
+        "Tu grupo te sigue hacia la derecha.",
+        "Lleva gafas."
+      ]
+    },
+    "Hy": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ]
+    },
+    "Joel": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ]
+    },
+    "Manuel": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ]
+    },
+    "Abel": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ]
+    },
+    "Javi": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ]
+    },
+    "Roque": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ],
+      "igotta": [
+        "En el segundo “uu”, prepárate para coger a Ruth/Paula."
+      ]
+    },
+    "Rubén": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ]
+    },
+    "Iker": {
+      "uptown": [
+        "Lleva gafas.",
+        "Da palmadas en el tercer “girls say hallelujah”, después de que Marta vaya hacia delante y señale a las chicas."
+      ]
+    },
+    "Ruth": {
+      "igotta": [
+        "Tienes que caer en el segundo “uu”.",
+        "Roque y Laura estarán preparados para cogerte."
+      ],
+      "grease": [
+        "Vas a buscar a María y Carlos junto a Sofía M."
+      ]
+    },
+    "Paula": {
+      "igotta": [
+        "Tienes que caer en el segundo “uu”.",
+        "Roque y Laura estarán preparados para cogerte."
+      ]
+    },
+    "Daniela": {
+      "igotta": [
+        "Vas delante del todo.",
+        "Haces el momento “I gotta feeling”."
+      ]
+    },
+    "Sofía M": {
+      "igotta": [
+        "Ojo: aquí eres Sofía M, no Sof."
+      ],
+      "grease": [
+        "Vas a buscar a María y Carlos junto a Ruth."
+      ]
+    },
+    "Sof": {
+      "wannabe": [
+        "Ojo: aquí eres Sof, no Sofía M."
+      ]
+    }
   }
 };
